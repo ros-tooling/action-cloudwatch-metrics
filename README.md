@@ -26,15 +26,15 @@ jobs:
     - name: Build
       run: ./my-build-script.sh
     - name: Log Build Failure
-      uses: ./.github/actions/cw-build-status/
+      uses: ros-tooling/action-cloudwatch-metrics@0.0.1
       with:
         status: 'failure'
-      if: failure() && github.ref == 'refs/heads/master'
+      if: failure() && github.event == 'schedule'
     - name: Log Build Success
-      uses: ./.github/actions/cw-build-status/
+      uses: ros-tooling/action-cloudwatch-metrics@0.0.1
       with:
         status: 'success'
-      if: success() && github.ref == 'refs/heads/master'
+      if: success() && github.event == 'schedule'
 ```
 
 ## CloudWatch Metrics format
