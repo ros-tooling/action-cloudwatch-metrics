@@ -10,13 +10,13 @@ const MOCK_NAMESPACE = 'GithubCI'
 const MOCK_REPO = 'ros-tooling/action-cloudwatch-metrics'
 const MOCK_RETURN = 'success'
 const ENVIRONMENT_VARIABLE_OVERRIDES = {
-  GITHUB_REPOSITORY: 'MY-REPOSITORY-NAME',
-  GITHUB_WORKFLOW: 'MY-WORKFLOW-ID',
   GITHUB_ACTION: 'MY-ACTION-NAME',
   GITHUB_ACTOR: 'MY-USERNAME[bot]',
+  GITHUB_EVENT_PATH: path.join(__dirname, 'payload.json'),
   GITHUB_REF: 'MY-BRANCH',
+  GITHUB_REPOSITORY: 'MY-REPOSITORY-NAME',
   GITHUB_SHA: 'MY-COMMIT-ID',
-  GITHUB_EVENT_PATH: path.join(__dirname, 'payload.json')
+  GITHUB_WORKFLOW: 'MY-WORKFLOW-ID'
 }
 
 describe('Integration test suite', () => {

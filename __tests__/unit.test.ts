@@ -40,6 +40,7 @@ describe('unit test suite', () => {
     const result = createMetricDatum(metricName, projectName, isCronJob, value)
     expect(result.MetricName).toStrictEqual(metricName)
     expect(result.Value).toStrictEqual(value)
+    expect(result.Dimensions.length).toBeGreaterThanOrEqual(1)
   })
 
   test('publishMetricData calls SDK', async () => {

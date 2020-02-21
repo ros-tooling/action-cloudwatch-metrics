@@ -23254,16 +23254,16 @@ const context = github.context;
 const FAILED_BUILDS_METRIC_NAME = 'FailedBuilds';
 const NUM_BUILDS_METRIC_NAME = 'Builds';
 const SUCCESS_BUILDS_METRIC_NAME = 'SucceededBuilds';
-const PROJECT_DIMENSION = 'ProjectName';
-const IS_CRON_JOB_DIMENSION = 'IsCronJob';
+const SCHEDULE_EVENT_NAME = 'schedule';
 const EVENT_NAME_DIMENSION = 'EventName';
-const WORKFLOW_DIMENSION = 'Workflow';
-const REFERENCE_DIMENSION = 'Reference';
+const IS_CRON_JOB_DIMENSION = 'IsCronJob';
+const PROJECT_DIMENSION = 'ProjectName';
 const REPOSITORY_DIMENSION = 'Repository';
+const REFERENCE_DIMENSION = 'Reference';
+const WORKFLOW_DIMENSION = 'Workflow';
 const SUCCESS_METRIC_VALUE = 1.0;
 const FAILED_METRIC_VALUE = 0.0;
 const FAILED_BUILD_STATUS = 'failure';
-const SCHEDULE_EVENT_NAME = 'schedule';
 function checkStatusString(status) {
     const validBuildStatusCheck = new RegExp('(success|failure)');
     if (!status.match(validBuildStatusCheck)) {
@@ -23277,12 +23277,12 @@ function createMetricDatum(metricName, projectName, isCronJob, value) {
         'MetricName': metricName,
         'Value': value,
         'Dimensions': [
-            { 'Name': PROJECT_DIMENSION, 'Value': projectName },
-            { 'Name': IS_CRON_JOB_DIMENSION, 'Value': cronJobString },
             { 'Name': EVENT_NAME_DIMENSION, 'Value': context.eventName },
-            { 'Name': WORKFLOW_DIMENSION, 'Value': context.workflow },
+            { 'Name': IS_CRON_JOB_DIMENSION, 'Value': cronJobString },
+            { 'Name': PROJECT_DIMENSION, 'Value': projectName },
             { 'Name': REFERENCE_DIMENSION, 'Value': context.ref },
             { 'Name': REPOSITORY_DIMENSION, 'Value': context.repo.repo },
+            { 'Name': WORKFLOW_DIMENSION, 'Value': context.workflow },
         ]
     };
     return metric_datum;
