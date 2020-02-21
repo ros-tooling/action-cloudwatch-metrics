@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import * as path from 'path'
 import CloudWatch from 'aws-sdk/clients/cloudwatch'
 import {postBuildStatus} from '../src/cw-build-status'
 
@@ -8,14 +9,26 @@ jest.mock('@actions/core')
 const MOCK_NAMESPACE = 'GithubCI'
 const MOCK_REPO = 'ros-tooling/action-cloudwatch-metrics'
 const MOCK_RETURN = 'success'
+const ENVIRONMENT_VARIABLE_OVERRIDES = {
+  GITHUB_REPOSITORY: 'MY-REPOSITORY-NAME',
+  GITHUB_WORKFLOW: 'MY-WORKFLOW-ID',
+  GITHUB_ACTION: 'MY-ACTION-NAME',
+  GITHUB_ACTOR: 'MY-USERNAME[bot]',
+  GITHUB_REF: 'MY-BRANCH',
+  GITHUB_SHA: 'MY-COMMIT-ID',
+  GITHUB_EVENT_PATH: path.join(__dirname, 'payload.json')
+}
 
 describe('Integration test suite', () => {
+  const OLD_ENV = process.env
+
   beforeEach(() => {
     jest.clearAllMocks()
     jest.spyOn(core, 'getInput')
         .mockReturnValueOnce(MOCK_NAMESPACE)  // namespace
         .mockReturnValueOnce(MOCK_REPO)       // project-name
         .mockReturnValueOnce(MOCK_RETURN)     // status
+    process.env = {...OLD_ENV, ...ENVIRONMENT_VARIABLE_OVERRIDES};  
   })
 
   test('post build metrics successfully', async () => {
