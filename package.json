@@ -6,8 +6,8 @@
   "scripts": {
     "build": "ncc build src/cw-build-status.ts -o dist",
     "lint": "eslint --fix src/*.ts __tests__/*.ts",
-    "test": "tsc --noEmit && jest --coverage",
-    "precommit": "npm run build && npm run lint"
+    "precommit": "npm run build && npm run lint",
+    "test": "tsc --noEmit && jest --coverage"
   },
   "author": "AWS RoboMaker",
   "licenses": [
