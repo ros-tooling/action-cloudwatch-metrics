@@ -5,19 +5,19 @@ import CloudWatch from 'aws-sdk/clients/cloudwatch'
 const cloudwatch = new CloudWatch()
 const context = github.context
 
-const FAILED_BUILDS_METRIC_NAME = 'FailedBuilds'
-const NUM_BUILDS_METRIC_NAME = 'Builds'
-const SUCCESS_BUILDS_METRIC_NAME = 'SucceededBuilds'
-const SCHEDULE_EVENT_NAME = 'schedule'
 const EVENT_NAME_DIMENSION = 'EventName'
+const FAILED_BUILD_STATUS = 'failure'
+const FAILED_BUILDS_METRIC_NAME = 'FailedBuilds'
+const FAILED_METRIC_VALUE = 0.0
 const IS_CRON_JOB_DIMENSION = 'IsCronJob'
+const NUM_BUILDS_METRIC_NAME = 'Builds'
 const PROJECT_DIMENSION = 'ProjectName'
 const REPOSITORY_DIMENSION = 'Repository'
 const REFERENCE_DIMENSION = 'Reference'
-const WORKFLOW_DIMENSION = 'Workflow'
+const SCHEDULE_EVENT_NAME = 'schedule'
+const SUCCESS_BUILDS_METRIC_NAME = 'SucceededBuilds'
 const SUCCESS_METRIC_VALUE = 1.0
-const FAILED_METRIC_VALUE = 0.0
-const FAILED_BUILD_STATUS = 'failure'
+const WORKFLOW_DIMENSION = 'Workflow'
 
 /**
  * Validate the `status` input to the action.
