@@ -23,6 +23,7 @@ jobs:
       with:
         node-version: '12.x'
     - run: .github/workflows/build-and-test.sh
+    # Run with a valid metrics JSON file just to make sure that it doesn't crash when doing so
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
