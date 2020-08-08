@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
+import * as fs from "fs";
 import CloudWatch from "aws-sdk/clients/cloudwatch";
-import fs from "fs";
 
 /**
  * Parse parameters from input, populate the metrics, and publish them to CloudWatch.
@@ -14,7 +14,7 @@ export async function run() {
 
 		let metricData = [];
 		if (metricDataPath) {
-			const contents = fs.readFile(metricDataPath, 'utf8');
+			const contents = fs.readFileSync(metricDataPath, 'utf8');
 			metricData = JSON.parse(contents);
 		} else {
 			let metricValueAsFloat = 0.0;
@@ -38,6 +38,7 @@ export async function run() {
 			};
 			metricData = [metricDatum];
 		}
+
 		core.info(
 			`Publishing metrics ${JSON.stringify(
 				metricData,
