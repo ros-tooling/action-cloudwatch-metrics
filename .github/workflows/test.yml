@@ -30,8 +30,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
     - run: .github/workflows/generate-metrics-file.sh
-    - uses: ros-tooling/action-cloudwatch-metrics@0.0.4
+    - uses: ./
       with:
+        namespace: ActionCloudWatchMetricsTests
         metric-data: metrics.json
 
   log_workflow_status_to_cloudwatch:
